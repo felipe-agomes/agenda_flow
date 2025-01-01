@@ -1,0 +1,21 @@
+#panel {
+    height: 100%;
+    background: orange;
+
+    transition: 0.3s;
+}
+
+#panel.close {
+    width: 40px;
+}
+
+#panel.open {
+    width: 30%;
+}
+
+#panel > .panelButton {
+    width: 40px;
+    height: 40px;
+    background: yellow;
+    border: none;
+}
