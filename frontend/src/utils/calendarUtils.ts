@@ -1,6 +1,7 @@
 type MonthInfo = {
   daysInMonth: number;
   currentMonthName: string;
+  currentMonth: number;
 };
 
 function getCurrentMonthInfo(): MonthInfo {
@@ -11,6 +12,7 @@ function getCurrentMonthInfo(): MonthInfo {
   return {
     daysInMonth: new Date(year, month + 1, 0).getDate(),
     currentMonthName: now.toLocaleString("default", { month: "long" }),
+    currentMonth: now.getMonth(),
   };
 }
 
