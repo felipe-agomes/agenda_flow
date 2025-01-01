@@ -5,6 +5,9 @@ type CalendarContextType = {
   setTitle: (newTitle: string) => void;
 };
 
-const CalendarContext = createContext<CalendarContextType>({title: "", setTitle: () => {}});
+const CalendarContext = createContext<CalendarContextType>({
+  title: "",
+  setTitle: () => {},
+});
 
 export default CalendarContext;

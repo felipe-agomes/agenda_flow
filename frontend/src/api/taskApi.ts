@@ -11,7 +11,7 @@ type TaskResponse = {
 
 const taskApi = {
     getTasks: async (userId: number, month: number): Promise<TaskResponse> => {
-        return {tasks: [{id: 1, day: 1, description: "teste title", title: "teste description"}]};
+        return {tasks: [{id: userId, day: month, description: "teste title", title: "teste description"}]};
     }
 }
 
