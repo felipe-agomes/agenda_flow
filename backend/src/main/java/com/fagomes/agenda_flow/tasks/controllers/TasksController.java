@@ -1,35 +1,25 @@
-package com.fagomes.agenda_flow.tasks.webservice.controllers;
+package com.fagomes.agenda_flow.tasks.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fagomes.agenda_flow.tasks.entities.Task;
 import com.fagomes.agenda_flow.tasks.services.TaskService;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api/task")
 public class TasksController {
 
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/hello")
-    public List<Task> getMethodName() {
-        return this.taskService.getAllTasks();
+    @GetMapping
+    public List<Task> getTasks(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month) {
+        return this.taskService.getTasksByUserAndMonth(userId, year, month);
     }
-
-    @GetMapping("/teste")
-    public Task getMethodNa() {
-        Task task = new Task();
-        task.setTitle("title");
-        task.setDescription("desc");
-        return this.taskService.salvar(task);
-    }
-    
 }
