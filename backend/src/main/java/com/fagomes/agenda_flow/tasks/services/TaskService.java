@@ -23,11 +23,15 @@ public class TaskService {
     }
 
     public List<Task> getTasksByUserAndMonth(Long userId, Integer year, Integer month) {
-        LocalDate startDate = YearMonth.of(year, month + 1).atDay(1);
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("O mês deve estar entre 1 e 12."); // TODO: Criar uma exception personalizada.
+        }
+
+        LocalDate startDate = YearMonth.of(year, month).atDay(1);
         LocalTime startTime = LocalTime.of(0, 0, 0);
         LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
 
-        LocalDate endDate = YearMonth.of(year, month + 1).atEndOfMonth();
+        LocalDate endDate = YearMonth.of(year, month).atEndOfMonth();
         LocalTime endTime = LocalTime.of(23, 59, 59);
         LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
 
