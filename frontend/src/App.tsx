@@ -1,5 +1,5 @@
 import "./App.css";
-import Calendar from "./components/Calendar";
+import CalendarPage from "./components/CalendarPage";
 import Tamplate from "./components/Tamplate";
 import CalendarProvider from "./providers/CalendarProvider";
 
@@ -8,7 +8,7 @@ function App() {
     <>
       <CalendarProvider>
         <Tamplate>
-          <Calendar />
+          <CalendarPage />
         </Tamplate>
       </CalendarProvider>
     </>
