@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean install
+RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim AS deploy
 
