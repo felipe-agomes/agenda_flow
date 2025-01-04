@@ -16,8 +16,10 @@ const taskApi = {
     year: number,
     month: number
   ): Promise<TaskResponse[]> => {
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const response = await axios.get<TaskResponse[]>(
-      "http://localhost:8080/api/task",
+      `${apiUrl}/api/task`,
       {
         headers: { userId: userId, year: year, month: month },
       }
