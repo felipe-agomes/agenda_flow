@@ -2,6 +2,8 @@ package com.fagomes.agenda_flow.tasks.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Task> tasks;
 
     public Long getId() {
