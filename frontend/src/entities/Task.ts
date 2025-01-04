@@ -1,19 +1,28 @@
 export default class Task {
   private _id: number;
-  private _day: number;
   private _title: string;
   private _description: string;
+  private _dueAt: Date;
+  private _createdAt: Date;
+  private _completedAt: Date;
+  private _deletedAt: Date;
 
   public constructor(
     id: number,
-    day: number,
     title: string,
-    description: string
+    description: string,
+    dueAt: Date,
+    createdAt: Date,
+    completedAt: Date,
+    deletedAt: Date
   ) {
     this._id = id;
-    this._day = day;
     this._title = title;
     this._description = description;
+    this._dueAt = dueAt;
+    this._createdAt = createdAt;
+    this._completedAt = completedAt;
+    this._deletedAt = deletedAt;
   }
 
   public get id() {
@@ -22,14 +31,6 @@ export default class Task {
 
   public set id(value: number) {
     this._id = value;
-  }
-
-  public get day() {
-    return this._day;
-  }
-
-  public set day(value: number) {
-    this._day = value;
   }
 
   public get title() {
@@ -46,5 +47,37 @@ export default class Task {
 
   public set description(value: string) {
     this._description = value;
+  }
+
+  public get dueAt() {
+    return this._dueAt;
+  }
+
+  public set dueAt(value: Date) {
+    this._dueAt = value;
+  }
+
+  public get createdAt() {
+    return this._createdAt;
+  }
+
+  public set createdAt(value: Date) {
+    this._createdAt = value;
+  }
+
+  public get completedAt() {
+    return this._completedAt;
+  }
+
+  public set completedAt(value: Date) {
+    this._completedAt = value;
+  }
+
+  public get deletedAt() {
+    return this._deletedAt;
+  }
+
+  public set deletedAt(value: Date) {
+    this._deletedAt = value;
   }
 }

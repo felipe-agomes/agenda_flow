@@ -4,19 +4,20 @@ import CalendarContext from "../../contexts/CalendarContext";
 import CalendarDay from "../../entities/CalendarDay";
 import Task from "../../entities/Task";
 import taskService from "../../services/taskService";
-import { getCurrentMonthInfo } from "../../utils/calendarUtils";
 import Day from "../Day";
 import Panel from "../Panel";
 import "./Calendar.css";
+import calendarUtils from "../../utils/calendarUtils";
 
 export default function Calendar() {
-  const USER = 1; /* TODO: Aqui ta fixo, mas precisa criar um esquema de login*/
+  const USER = 9361; /* TODO: Aqui ta fixo, mas precisa criar um esquema de login*/
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [calendar, setCalendar] = useState<CalendarDay[]>([]);
   const { setTitle } = useContext(CalendarContext);
 
-  const { daysInMonth, currentMonthName, currentMonth } = getCurrentMonthInfo(); // TODO: Por inquando, ele esta permitindo utilizar apenas do mes atual, mas precisa ajustar para poder selecionar o mes tambem
+  const { daysInMonth, currentMonthName, currentMonth, currentYear } =
+    calendarUtils.getCurrentMonthInfo(); // TODO: Por inquando, ele esta permitindo utilizar apenas do mes atual, mas precisa ajustar para poder selecionar o mes tambem
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,13 +25,19 @@ export default function Calendar() {
 
       const fetchedTasks = await taskService.fetchTasks(
         USER /* TODO: Aqui ta fixo, mas precisa criar um esquema de login*/,
+        currentYear,
         currentMonth
       );
       setTasks(fetchedTasks);
 
       const updatedCalendar = Array.from({ length: daysInMonth }, (_, i) => {
-        const task = fetchedTasks.filter((task) => task.day === i + 1);
-        return new CalendarDay(i + 1, task);
+        const day = i + 1;
+
+        const tasks = fetchedTasks.filter((task) => {
+          calendarUtils.isTaskForDay(task, day);
+        });
+
+        return new CalendarDay(day, tasks);
       });
 
       setCalendar(updatedCalendar);

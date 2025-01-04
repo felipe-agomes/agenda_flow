@@ -1,18 +1,30 @@
-export type TaskDto = {
-    id: number;
-    day: number;
-    title: string;
-    description: string;
-}
+import axios from "axios";
 
-type TaskResponse = {
-    tasks: TaskDto[]
-}
+export type TaskResponse = {
+  id: number;
+  title: string;
+  description: string;
+  dueAt: string;
+  createdAt: string;
+  completedAt: string;
+  deletedAt: string;
+};
 
 const taskApi = {
-    getTasks: async (userId: number, month: number): Promise<TaskResponse> => {
-        return {tasks: [{id: userId, day: month, description: "teste title", title: "teste description"}]};
-    }
-}
+  getTasks: async (
+    userId: number,
+    year: number,
+    month: number
+  ): Promise<TaskResponse[]> => {
+    const response = await axios.get<TaskResponse[]>(
+      "http://localhost:8080/api/task",
+      {
+        headers: { userId: userId, year: year, month: month },
+      }
+    );
+
+    return response.data;
+  },
+};
 
 export default taskApi;
