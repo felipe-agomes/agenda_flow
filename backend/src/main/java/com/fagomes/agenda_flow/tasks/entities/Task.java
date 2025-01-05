@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-@Entity(name = "tasks")
+@Entity(name = "tasks") // TODO: Falta colocar as constraints
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

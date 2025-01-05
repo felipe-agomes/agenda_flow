@@ -19,8 +19,13 @@ public class TasksController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping
-    public ResponseEntity<List<Task>> getTasks(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month) {
-        return ResponseEntity.ok(this.taskService.getTasksByUserAndMonth(userId, year, month));
+    @GetMapping("/month")
+    public ResponseEntity<List<Task>> getTasksMonth(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month) {
+        return ResponseEntity.ok(this.taskService.getTasksByUserAndMonth(userId, year, month)); // TODO: AJustar para retornar tambem as que estao atrasadas dos meses anteriores
+    }
+
+    @GetMapping("/day")
+    public ResponseEntity<List<Task>> getTasksDay(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month, @RequestHeader Integer day) {
+        return ResponseEntity.ok(this.taskService.getTasksByUserAndDay(userId, year, month, day));
     }
 }
