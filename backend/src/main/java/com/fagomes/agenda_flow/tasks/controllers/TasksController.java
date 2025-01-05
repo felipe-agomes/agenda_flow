@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fagomes.agenda_flow.tasks.dtos.TaskDto;
 import com.fagomes.agenda_flow.tasks.entities.Task;
 import com.fagomes.agenda_flow.tasks.services.TaskService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping(path = "/api/task")
@@ -21,11 +25,17 @@ public class TasksController {
 
     @GetMapping("/month")
     public ResponseEntity<List<Task>> getTasksMonth(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month) {
-        return ResponseEntity.ok(this.taskService.getTasksByUserAndMonth(userId, year, month)); // TODO: AJustar para retornar tambem as que estao atrasadas dos meses anteriores
+        return ResponseEntity.ok(taskService.getTasksByUserIdAndMonth(userId, year, month)); // TODO: AJustar para retornar tambem as que estao atrasadas dos meses anteriores
     }
 
     @GetMapping("/day")
     public ResponseEntity<List<Task>> getTasksDay(@RequestHeader Long userId, @RequestHeader Integer year, @RequestHeader Integer month, @RequestHeader Integer day) {
-        return ResponseEntity.ok(this.taskService.getTasksByUserAndDay(userId, year, month, day));
+        return ResponseEntity.ok(taskService.getTasksByUserIdAndDay(userId, year, month, day));
     }
+
+    @PostMapping("/save")
+    public ResponseEntity<Task> save(@RequestBody Task task, @RequestHeader Long userId) {
+        return ResponseEntity.ok(taskService.save(task, userId));
+    }
+    
 }

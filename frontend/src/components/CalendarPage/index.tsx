@@ -3,15 +3,15 @@ import "./CalendarPage.css";
 import Calendar from "../Calendar";
 import { useContext } from "react";
 import CalendarContext from "../../contexts/CalendarContext";
+import ModalTask from "../ModalTask";
 
 export default function CalendarPage() {
-  const { setSelectedDay } = useContext(CalendarContext);
+  const { setSelectedDay, closeModalTask } = useContext(CalendarContext);
 
   const handleKeyDow = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === "Escape") {
-      console.log("aqui");
-
       setSelectedDay(undefined);
+      closeModalTask();
     }
   };
 
@@ -19,6 +19,7 @@ export default function CalendarPage() {
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar />
       <Panel />
+      <ModalTask />
     </section>
   );
 }

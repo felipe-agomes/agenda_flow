@@ -1,4 +1,4 @@
-import CalendarDay from "../entities/CalendarDay";
+import Calendar from "../entities/CalendarMonth";
 import Task from "../entities/Task";
 
 type MonthInfo = {
@@ -24,16 +24,16 @@ const calendarUtils = {
     };
   },
 
-  getTasks: (calendar: CalendarDay[], selectedDay?: number): Task[] => {
+  getTasks: (calendar: Calendar, selectedDay?: number) => {
     return selectedDay
-      ? calendar.find(({ day }) => day === selectedDay)?.tasks ?? []
+      ? calendar.calendarDays.find(({ day }) => day === selectedDay)?.tasks ?? []
       : calendarUtils.getAllTask(calendar);
   },
 
-  getAllTask: (calendar: CalendarDay[]): Task[] => {
+  getAllTask: (calendar: Calendar): Task[] => {
     const tasks: Task[] = [];
 
-    for (const calendarDay of calendar) {
+    for (const calendarDay of calendar.calendarDays) {
       for (const task of calendarDay.tasks) {
         tasks.push(task);
       }
@@ -42,9 +42,19 @@ const calendarUtils = {
     return tasks;
   },
 
-  isTaskForDay: (task: Task, day: number): boolean => {
+  isTaskForDay: (task: Task, day: number) => {
     return task.dueAt.getDate() === day;
   },
+
+  addTaskOnCalendar: (calendar: Calendar, task: Task) => {
+    for (const calendarDay of calendar.calendarDays) {
+      if (calendarDay.day === task.dueAt.getDay()) {
+        calendarDay.tasks.push(task);
+      }
+    }
+
+    return calendar;
+  }
 };
 
 export default calendarUtils;

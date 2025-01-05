@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fagomes.agenda_flow.tasks.entities.Task;
+import com.fagomes.agenda_flow.tasks.entities.User;
 import com.fagomes.agenda_flow.tasks.repositories.TaskRepository;
 
 @Service
@@ -18,11 +19,14 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
-    public List<Task> getTasksByUserAndMonth(Long userId, Integer year, Integer month) {
+    public List<Task> getTasksByUserIdAndMonth(Long userId, Integer year, Integer month) {
         validateMonth(month);
 
         LocalDateTime startMonth = getFirstDayFromMonth(year, month);
@@ -31,7 +35,7 @@ public class TaskService {
         return taskRepository.findByUserIdAndDueAtBetween(userId, startMonth, endMonth).orElse(new ArrayList<>()); // TODO: AJustar para pegar tambem as tarefas atrasadas
     }
 
-    public List<Task> getTasksByUserAndDay(Long userId, Integer year, Integer month, Integer day) {
+    public List<Task> getTasksByUserIdAndDay(Long userId, Integer year, Integer month, Integer day) {
         validateMonth(month);
 
         LocalDateTime startDay = LocalDateTime.of(year, month, day, 0, 0);
@@ -40,7 +44,10 @@ public class TaskService {
         return taskRepository.findByUserIdAndDueAtBetween(userId, startDay, endDay).orElse(new ArrayList<>());
     }
 
-    public Task salvar(Task task) {
+    public Task save(Task task, Long userId) {
+        User user = userService.getUserById(userId);
+        task.setUser(user);
+
         return taskRepository.save(task);
     }
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Task from "../entities/Task";
 
 export type TaskResponse = {
   id: number;
@@ -11,31 +12,61 @@ export type TaskResponse = {
 };
 
 const taskApi = {
+  API_URL: import.meta.env.VITE_API_URL,
   getTasksMonth: async (
     userId: number,
-    year: number,
-    month: number
+    year?: number,
+    month?: number
   ): Promise<TaskResponse[]> => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-
-    const response = await axios.get<TaskResponse[]>(`${apiUrl}/api/task/month`, {
-      headers: { userId, year, month },
-    });
+    const response = await axios.get<TaskResponse[]>(
+      `${taskApi.API_URL}/api/task/month`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          userId,
+          year,
+          month,
+        },
+      }
+    );
 
     return response.data;
   },
 
   getTasksDay: async (
     userId: number,
-    year: number,
-    month: number,
-    day: number
+    year?: number,
+    month?: number,
+    day?: number
   ): Promise<TaskResponse[]> => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const response = await axios.get<TaskResponse[]>(`${apiUrl}/api/task/day`, {
-      headers: { userId, year, month, day },
-    });
+    const response = await axios.get<TaskResponse[]>(
+      `${taskApi.API_URL}/api/task/day`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          userId,
+          year,
+          month,
+          day,
+        },
+      }
+    );
 
+    return response.data;
+  },
+
+  saveTask: async (userId: number, task: Task): Promise<TaskResponse> => {
+    const response = await axios.post<TaskResponse>(
+      `${taskApi.API_URL}/api/task/save`,
+      task,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          userId,
+        },
+      }
+    );
+    
     return response.data;
   },
 };

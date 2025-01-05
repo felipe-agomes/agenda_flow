@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import CalendarDay from "../../entities/CalendarDay";
 import Day from "../Day";
 import "./Calendar.css";
@@ -8,29 +8,29 @@ import calendarUtils from "../../utils/calendarUtils";
 import taskService from "../../services/taskService";
 import CalendarContext from "../../contexts/CalendarContext";
 import Task from "../../entities/Task";
+import CalendarMonth from "../../entities/CalendarMonth";
 
 export default function Calendar() {
-  const USER = 9361; /* TODO: Aqui ta fixo, mas precisa criar um esquema de login*/
-
-  const { setTitle } = useContext(TamplateContext);
-  const { selectedDay, setTasks } = useContext(CalendarContext);
-
-  const [calendar, setCalendar] = useState<CalendarDay[]>([]); // TODO: Verificar se e realmente necessario esse useState
-
   const { daysInMonth, currentMonthName, currentMonth, currentYear } =
     calendarUtils.getCurrentMonthInfo(); // TODO: Quando ajustar para pegar o mes selecionado, alterar o nome das variaveis para selected... // TODO: Por inquando, ele esta permitindo utilizar apenas do mes atual, mas precisa ajustar para poder selecionar o mes tambem
+  const { setTitle } = useContext(TamplateContext);
+  const { userId, selectedDay, setTasks, calendar, setCalendar } =
+    useContext(CalendarContext);
 
-  const fetchTasks = async () => {
+  calendar.year = currentYear;
+  calendar.month = currentMonth;
+
+  const fetchTasks = async (calendar: CalendarMonth) => {
     const fetchedTasks = await taskService.fetchTasksMonth(
-          USER /* TODO: Aqui ta fixo, mas precisa criar um esquema de login*/,
-          currentYear,
-          currentMonth
-        );
+      userId,
+      calendar.year,
+      calendar.month
+    );
 
     return fetchedTasks;
   };
 
-  const updatedCalendar = (fetchedTasks: Task[]) => {
+  const getCalendarDay = (fetchedTasks: Task[]) => {
     const updatedCalendar = Array.from({ length: daysInMonth }, (_, i) => {
       const day = i + 1;
 
@@ -47,9 +47,9 @@ export default function Calendar() {
   const fetchData = async () => {
     setTitle(currentMonthName);
 
-    const fetchedTasks = await fetchTasks();
+    const fetchedTasks = await fetchTasks(calendar);
 
-    const calendar = updatedCalendar(fetchedTasks);
+    calendar.calendarDays = getCalendarDay(fetchedTasks);
     setCalendar(calendar);
 
     const tasks = calendarUtils.getAllTask(calendar);
@@ -61,13 +61,15 @@ export default function Calendar() {
   }, [currentMonth]);
 
   useEffect(() => {
-    const tasks = selectedDay ? calendarUtils.getTasks(calendar, selectedDay) : calendarUtils.getTasks(calendar);
+    const tasks = selectedDay
+      ? calendarUtils.getTasks(calendar, selectedDay)
+      : calendarUtils.getTasks(calendar);
     setTasks(tasks);
   }, [selectedDay]);
 
   return (
     <div id="calendar">
-      {calendar.map((calendarDay) => {
+      {calendar.calendarDays.map((calendarDay) => {
         return <Day key={calendarDay.day} calendarDay={calendarDay} />;
       })}
     </div>

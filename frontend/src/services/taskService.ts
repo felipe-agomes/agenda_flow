@@ -12,9 +12,7 @@ const taskService = {
     const tasks: Task[] = [];
 
     for (const taskResponse of tasksResponse) {
-      tasks.push(
-        taskMapper.toTask(taskResponse)
-      );
+      tasks.push(taskMapper.toTask(taskResponse));
     }
 
     return tasks;
@@ -30,12 +28,16 @@ const taskService = {
     const tasks: Task[] = [];
 
     for (const taskResponse of tasksResponse) {
-      tasks.push(
-        taskMapper.toTask(taskResponse)
-      );
+      tasks.push(taskMapper.toTask(taskResponse));
     }
 
     return tasks;
+  },
+
+  saveTask: async (userId: number, task: Task): Promise<Task> => {
+    const taskResponse = await taskApi.saveTask(userId, task);
+
+    return taskMapper.toTask(taskResponse);
   },
 };
 

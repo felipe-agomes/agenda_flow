@@ -1,6 +1,6 @@
 package com.fagomes.agenda_flow.tasks.entities;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,16 +25,16 @@ public class Task {
     private String description;
 
     @Column(name = "due_at")
-    private Timestamp dueAt;
+    private LocalDateTime dueAt;
 
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "completed_at")
-    private Timestamp completedAt;
+    private LocalDateTime completedAt;
 
     @Column(name = "deleted_at")
-    private Timestamp deletedAt;
+    private LocalDateTime deletedAt;
 
     @ManyToOne
     @JoinColumn(
@@ -68,35 +68,35 @@ public class Task {
         this.description = description;
     }
 
-    public Timestamp getDueAt() {
+    public LocalDateTime getDueAt() {
         return dueAt;
     }
 
-    public void setDueAt(Timestamp dueAt) {
+    public void setDueAt(LocalDateTime dueAt) {
         this.dueAt = dueAt;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getCompletedAt() {
+    public LocalDateTime getCompletedAt() {
         return completedAt;
     }
 
-    public void setCompletedAt(Timestamp completedAt) {
+    public void setCompletedAt(LocalDateTime completedAt) {
         this.completedAt = completedAt;
     }
 
-    public Timestamp getDeletedAt() {
+    public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(Timestamp deletedAt) {
+    public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
 

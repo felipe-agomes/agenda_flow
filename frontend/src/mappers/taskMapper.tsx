@@ -10,6 +10,10 @@ const taskMapper = {
       id,
       title,
       description,
+      // dueAt,
+      // createdAt,
+      // completedAt,
+      // deletedAt
       taskMapper.convertToDate(dueAt),
       taskMapper.convertToDate(createdAt),
       completedAt ? taskMapper.convertToDate(completedAt) : null,
