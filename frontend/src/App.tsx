@@ -1,6 +1,7 @@
 import "./App.css";
 import CalendarPage from "./components/CalendarPage";
 import Tamplate from "./components/Tamplate";
+import CalendarProvider from "./providers/CalendarProvider";
 import TamplateProvider from "./providers/TamplateProvider";
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
     <>
       <TamplateProvider>
         <Tamplate>
-          <CalendarPage />
+          <CalendarProvider>
+            <CalendarPage />
+          </CalendarProvider>
         </Tamplate>
       </TamplateProvider>
     </>
