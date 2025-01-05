@@ -1,7 +1,6 @@
 import Panel from "../Panel";
 import "./CalendarPage.css";
 import Calendar from "../Calendar";
-import CalendarProvider from "../../providers/CalendarProvider";
 import { useContext } from "react";
 import CalendarContext from "../../contexts/CalendarContext";
 
