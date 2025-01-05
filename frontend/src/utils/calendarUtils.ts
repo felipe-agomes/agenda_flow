@@ -1,3 +1,4 @@
+import CalendarDay from "../entities/CalendarDay";
 import Task from "../entities/Task";
 
 type MonthInfo = {
@@ -21,6 +22,24 @@ const calendarUtils = {
       currentMonth,
       currentYear,
     };
+  },
+
+  getTasks: (calendar: CalendarDay[], selectedDay?: number): Task[] => {
+    return selectedDay
+      ? calendar.find(({ day }) => day === selectedDay)?.tasks ?? []
+      : calendarUtils.getAllTask(calendar);
+  },
+
+  getAllTask: (calendar: CalendarDay[]): Task[] => {
+    const tasks: Task[] = [];
+
+    for (const calendarDay of calendar) {
+      for (const task of calendarDay.tasks) {
+        tasks.push(task);
+      }
+    }
+
+    return tasks;
   },
 
   isTaskForDay: (task: Task, day: number): boolean => {

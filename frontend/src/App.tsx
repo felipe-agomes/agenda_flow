@@ -1,16 +1,16 @@
 import "./App.css";
 import CalendarPage from "./components/CalendarPage";
 import Tamplate from "./components/Tamplate";
-import CalendarProvider from "./providers/CalendarProvider";
+import TamplateProvider from "./providers/TamplateProvider";
 
 function App() {
   return (
     <>
-      <CalendarProvider>
+      <TamplateProvider>
         <Tamplate>
           <CalendarPage />
         </Tamplate>
-      </CalendarProvider>
+      </TamplateProvider>
     </>
   );
 }

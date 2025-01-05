@@ -4,8 +4,8 @@ export default class Task {
   private _description: string;
   private _dueAt: Date;
   private _createdAt: Date;
-  private _completedAt: Date;
-  private _deletedAt: Date;
+  private _completedAt: Date | null;
+  private _deletedAt: Date | null;
 
   public constructor(
     id: number,
@@ -13,8 +13,8 @@ export default class Task {
     description: string,
     dueAt: Date,
     createdAt: Date,
-    completedAt: Date,
-    deletedAt: Date
+    completedAt: Date | null,
+    deletedAt: Date | null
   ) {
     this._id = id;
     this._title = title;
@@ -65,19 +65,19 @@ export default class Task {
     this._createdAt = value;
   }
 
-  public get completedAt() {
+  public get completedAt(): Date | null {
     return this._completedAt;
   }
 
-  public set completedAt(value: Date) {
+  public set completedAt(value: Date | null) {
     this._completedAt = value;
   }
 
-  public get deletedAt() {
+  public get deletedAt(): Date | null {
     return this._deletedAt;
   }
 
-  public set deletedAt(value: Date) {
+  public set deletedAt(value: Date | null) {
     this._deletedAt = value;
   }
 }

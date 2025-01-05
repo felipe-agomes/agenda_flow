@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Panel.css";
-import Task from "../../entities/Task";
+import CalendarContext from "../../contexts/CalendarContext";
 
-type PanelProp = {
-  tasks: Task[];
-};
+export default function Panel() {
+  const { tasks } = useContext(CalendarContext);
 
-export default function Panel({ tasks }: PanelProp) {
   const [panelStatus, setPanelStatus] = useState<string>("close");
 
   const handlePanelButton = () => {
@@ -20,7 +18,7 @@ export default function Panel({ tasks }: PanelProp) {
       </button>
       <ul>
         {tasks.map((task) => {
-          return <li key={task.id}>{task.title}</li>; // TODO: Criar um componente <Task /> porque vai ter mais complexidade
+          return <li key={task.id}>{task.dueAt + " = " + task.title}</li>; // TODO: Criar um componente <Task /> porque vai ter mais complexidade
         })}
       </ul>
     </div>

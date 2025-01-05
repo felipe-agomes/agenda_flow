@@ -2,11 +2,11 @@ import Task from "./Task";
 
 export default class CalendarDay {
   private _day: number;
-  private _task: Task[];
+  private _tasks: Task[];
 
   public constructor(day: number, task: Task[]) {
     this._day = day;
-    this._task = task;
+    this._tasks = task;
   }
 
   public get day() {
@@ -17,11 +17,11 @@ export default class CalendarDay {
     this._day = value;
   }
 
-  public get task(): Task[] {
-    return this._task;
+  public get tasks(): Task[] {
+    return this._tasks;
   }
 
-  public set task(value: Task[]) {
-    this._task = value;
+  public set tasks(value: Task[]) {
+    this._tasks = value;
   }
 }

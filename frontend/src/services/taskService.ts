@@ -1,42 +1,41 @@
 import taskApi from "../api/taskApi";
 import Task from "../entities/Task";
+import taskMapper from "../mappers/taskMapper";
 
 const taskService = {
-  fetchTasks: async (
+  fetchTasksMonth: async (
     userId: number,
     year: number,
     month: number
   ): Promise<Task[]> => {
-    const tasksResponse = await taskApi.getTasks(userId, year, month);
+    const tasksResponse = await taskApi.getTasksMonth(userId, year, month);
     const tasks: Task[] = [];
 
-    for (const {
-      id,
-      title,
-      description,
-      dueAt,
-      completedAt,
-      createdAt,
-      deletedAt,
-    } of tasksResponse) {
+    for (const taskResponse of tasksResponse) {
       tasks.push(
-        new Task(
-          id,
-          title,
-          description,
-          taskService.convertToDate(dueAt),
-          taskService.convertToDate(createdAt),
-          taskService.convertToDate(completedAt),
-          taskService.convertToDate(deletedAt)
-        )
+        taskMapper.toTask(taskResponse)
       );
     }
 
     return tasks;
   },
 
-  convertToDate: (toConvert: string): Date => {
-    return new Date(toConvert);
+  fetchTasksDay: async (
+    userId: number,
+    year: number,
+    month: number,
+    day: number
+  ): Promise<Task[]> => {
+    const tasksResponse = await taskApi.getTasksDay(userId, year, month, day);
+    const tasks: Task[] = [];
+
+    for (const taskResponse of tasksResponse) {
+      tasks.push(
+        taskMapper.toTask(taskResponse)
+      );
+    }
+
+    return tasks;
   },
 };
 

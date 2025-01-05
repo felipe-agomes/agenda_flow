@@ -1,13 +1,18 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
+import Task from "../entities/Task";
 
 type CalendarContextType = {
-  title: string;
-  setTitle: (newTitle: string) => void;
+  tasks: Task[];
+  setTasks: Dispatch<SetStateAction<Task[]>>;
+  selectedDay: number | undefined;
+  setSelectedDay: Dispatch<SetStateAction<number | undefined>>;
 };
 
 const CalendarContext = createContext<CalendarContextType>({
-  title: "",
-  setTitle: () => {},
+  tasks: [],
+  setTasks: () => {},
+  selectedDay: undefined,
+  setSelectedDay: () => {},
 });
 
 export default CalendarContext;
