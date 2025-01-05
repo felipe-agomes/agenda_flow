@@ -13,12 +13,12 @@ export default function Panel() {
 
   return (
     <div id="panel" className={panelStatus}>
-      <button className="panelButton" onClick={handlePanelButton}>
+      <button className="panel_button" onClick={handlePanelButton}>
         P
       </button>
-      <ul>
+      <ul id="task_list">
         {tasks.map((task) => {
-          return <li key={task.id}>{task.dueAt + " = " + task.title}</li>; // TODO: Criar um componente <Task /> porque vai ter mais complexidade
+          return <li key={task.id} className="task_item">{task.dueAt + " = " + task.title}</li>; // TODO: Criar um componente <Task /> porque vai ter mais complexidade
         })}
       </ul>
     </div>

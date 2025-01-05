@@ -13,9 +13,13 @@
     width: 30%;
 }
 
-#panel > .panelButton {
+#panel > .panel_button {
     width: 40px;
     height: 40px;
     background: yellow;
     border: none;
+}
+
+#panel > #task_list > .task_item {
+  white-space: nowrap;
 }
