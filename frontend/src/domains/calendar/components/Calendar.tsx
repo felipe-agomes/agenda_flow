@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
-import CalendarDay from "../../entities/CalendarDay";
-import Day from "../Day";
-import "./Calendar.css";
-import TamplateContext from "../../contexts/TamplateContext";
-import calendarUtils from "../../utils/calendarUtils";
-import taskService from "../../services/taskService";
-import CalendarContext from "../../contexts/CalendarContext";
-import Task from "../../entities/Task";
-import CalendarMonth from "../../entities/CalendarMonth";
+import CalendarDay from "../entities/CalendarDay";
+import Day from "./Day";
+import "../styles/Calendar.css";
+import calendarUtils from "../utils/calendarUtils";
+import Task from "../../task/entities/Task";
+import CalendarMonth from "../entities/CalendarMonth";
+import CalendarContext from "../../../shared/contexts/CalendarContext";
+import taskService from "../../task/services/taskService";
+import TamplateContext from "../../../shared/contexts/TamplateContext";
 
 export default function Calendar() {
   const { daysInMonth, currentMonthName, currentMonth, currentYear } =

@@ -1,5 +1,5 @@
 import Calendar from "../entities/CalendarMonth";
-import Task from "../entities/Task";
+import Task from "../../task/entities/Task";
 
 type MonthInfo = {
   daysInMonth: number;

@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import Header from "../Header";
-import "./Tamplate.css";
-import CalendarContext from "../../contexts/TamplateContext";
+import Header from "./Header";
+import "../styles/Tamplate.css";
+import CalendarContext from "../contexts/CalendarContext";
 
 type TamplateProps = {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import CalendarDay from "../../entities/CalendarDay";
-import "./Day.css";
-import CalendarContext from "../../contexts/CalendarContext";
+import CalendarDay from "../entities/CalendarDay";
+import "../styles/Day.css";
+import CalendarContext from "../../../shared/contexts/CalendarContext";
 
 type DayProps = {
   calendarDay: CalendarDay;

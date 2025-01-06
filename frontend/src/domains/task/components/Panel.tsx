@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import "./Panel.css";
-import CalendarContext from "../../contexts/CalendarContext";
+import "../styles/Panel.css";
+import CalendarContext from "../../../shared/contexts/CalendarContext";
 
 export default function Panel() {
   const { tasks, openModalTask, selectedDay } = useContext(CalendarContext);

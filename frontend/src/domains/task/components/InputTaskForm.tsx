@@ -1,4 +1,4 @@
-import "./InputTaskForm.css";
+import "../styles/InputTaskForm.css";
 import { useFormContext } from "react-hook-form";
 
 type InputTaskFormProp = {

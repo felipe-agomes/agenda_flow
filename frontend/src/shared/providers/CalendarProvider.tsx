@@ -1,8 +1,8 @@
 import { useState } from "react";
+import Task from "../../domains/task/entities/Task";
+import calendarUtils from "../../domains/calendar/utils/calendarUtils";
+import Calendar from "../../domains/calendar/entities/CalendarMonth";
 import CalendarContext from "../contexts/CalendarContext";
-import Task from "../entities/Task";
-import calendarUtils from "../utils/calendarUtils";
-import Calendar from "../entities/CalendarMonth";
 
 export default function CalendarProvider({
   children,
