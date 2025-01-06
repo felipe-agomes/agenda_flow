@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import Task from "../entities/Task";
-import Calendar from "../entities/CalendarMonth";
+import Task from "../../domains/task/entities/Task";
+import Calendar from "../../domains/calendar/entities/CalendarMonth";
 
 type CalendarContextType = {
   tasks: Task[];

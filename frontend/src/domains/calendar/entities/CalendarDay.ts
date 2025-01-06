@@ -1,4 +1,4 @@
-import Task from "./Task";
+import Task from "../../task/entities/Task";
 
 export default class CalendarDay {
   private _day: number;

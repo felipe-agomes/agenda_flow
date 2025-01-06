@@ -1,9 +1,9 @@
-import Panel from "../Panel";
-import "./CalendarPage.css";
-import Calendar from "../Calendar";
+import "../styles/CalendarPage.css";
+import Calendar from "./Calendar";
 import { useContext } from "react";
-import CalendarContext from "../../contexts/CalendarContext";
-import ModalTask from "../ModalTask";
+import ModalTask from "../../task/components/ModalTask";
+import CalendarContext from "../../../shared/contexts/CalendarContext";
+import Panel from "../../task/components/Panel";
 
 export default function CalendarPage() {
   const { setSelectedDay, closeModalTask } = useContext(CalendarContext);

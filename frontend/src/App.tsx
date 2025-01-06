@@ -1,8 +1,8 @@
-import "./App.css";
-import CalendarPage from "./components/CalendarPage";
-import Tamplate from "./components/Tamplate";
-import CalendarProvider from "./providers/CalendarProvider";
-import TamplateProvider from "./providers/TamplateProvider";
+import './App.css';
+import CalendarPage from "./domains/calendar/components/CalendarPage";
+import Tamplate from "./shared/components/Tamplate";
+import CalendarProvider from "./shared/providers/CalendarProvider";
+import TamplateProvider from "./shared/providers/TamplateProvider";
 
 function App() {
   return (
