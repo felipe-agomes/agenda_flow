@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Header from "./Header";
 import "../styles/Tamplate.css";
-import CalendarContext from "../contexts/CalendarContext";
+import TamplateContext from "../contexts/TamplateContext";
 
 type TamplateProps = {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ type TamplateProps = {
 };
 
 function Tamplate({ children, headerTitle }: TamplateProps) {
-  const { title } = useContext(CalendarContext);
+  const { title } = useContext(TamplateContext);
 
   return (
     <main id="tamplate">
