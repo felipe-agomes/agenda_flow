@@ -5,8 +5,8 @@ import taskMapper from "../mappers/taskMapper";
 const taskService = {
   fetchTasksMonth: async (
     userId: number,
-    year: number,
-    month: number
+    year?: number,
+    month?: number
   ): Promise<Task[]> => {
     const tasksResponse = await taskApi.getTasksMonth(userId, year, month);
     const tasks: Task[] = [];

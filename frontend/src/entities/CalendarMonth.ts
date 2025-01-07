@@ -1,4 +1,4 @@
-import CalendarDay from "./CalendarDay";
+import CalendarDay from "../domains/calendar/entities/CalendarDay";
 
 export default class CalendarMonth {
   private _year?: number;
