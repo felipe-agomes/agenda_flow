@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fagomes.agenda_flow.tasks.dtos.TaskDto;
 import com.fagomes.agenda_flow.tasks.entities.Task;
 import com.fagomes.agenda_flow.tasks.services.TaskService;
 import org.springframework.web.bind.annotation.PostMapping;
