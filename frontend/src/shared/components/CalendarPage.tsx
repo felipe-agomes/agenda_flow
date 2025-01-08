@@ -7,6 +7,7 @@ import TamplateContext from "../contexts/TamplateContext";
 import taskService from "../../domains/task/services/taskService";
 import ModalTask from "./ModalTask";
 import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
+import Task from "../../domains/task/entities/Task";
 
 export default function CalendarPage() {
   const { setTitle } = useContext(TamplateContext);
@@ -14,7 +15,7 @@ export default function CalendarPage() {
   const [calendar, setCalendar] = useState<CalendarMonth>(new CalendarMonth(2025, 0));
 
   const updateCalendar = useCallback(async () => {
-    const updatedCalendar = new CalendarMonth(2025, 0);
+    const updatedCalendar = new CalendarMonth(calendar.year, calendar.month);
 
     const tasks = await taskService.fetchTasksMonth(
       userId,
@@ -22,16 +23,25 @@ export default function CalendarPage() {
       updatedCalendar.month
     );
 
-    updatedCalendar.setTasks(tasks);
+    updatedCalendar.addTasks(tasks);
 
     setCalendar(updatedCalendar);
   }, [calendar, userId]);
+
+
+const addTaskOnCalendar = (task: Task) => {
+  const updatedCalendar = new CalendarMonth(calendar.year, calendar.month);
+  
+  updatedCalendar.addTasks([...calendar.getAllTasks(), task]);
+
+  setCalendar(updatedCalendar);
+};
 
   useEffect(() => {
     setTitle(calendar.getMonthName());
 
     updateCalendar();
-  }, [updateCalendar, setTitle]);
+  }, [setTitle]);
 
   const handleKeyDow = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === "Escape") {
@@ -44,7 +54,7 @@ export default function CalendarPage() {
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
       <Panel tasks={selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()} />
-      <ModalTask />
+      <ModalTask /* TODO: Renomear para FormTask */ calendar={calendar} selectedDay={selectedDay} callback={addTaskOnCalendar} />
     </section>
   );
 }

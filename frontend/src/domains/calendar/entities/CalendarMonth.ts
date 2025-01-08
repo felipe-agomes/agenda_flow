@@ -38,7 +38,7 @@ export default class CalendarMonth {
     return task.dueAt.getDate() === day;
   }
 
-  public setTasks(tasks: Task[]) {
+  public addTasks(tasks: Task[]) {
     for (const calendarDay of this.calendarDays) {
       for (const task of tasks) {
         if (this.isTaskForDay(task, calendarDay.day)) {

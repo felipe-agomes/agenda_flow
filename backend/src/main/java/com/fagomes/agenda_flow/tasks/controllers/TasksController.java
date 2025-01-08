@@ -3,16 +3,19 @@ package com.fagomes.agenda_flow.tasks.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fagomes.agenda_flow.tasks.entities.Task;
 import com.fagomes.agenda_flow.tasks.services.TaskService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @RestController
@@ -34,6 +37,7 @@ public class TasksController {
 
     @PostMapping("/save")
     public ResponseEntity<Task> save(@RequestBody Task task, @RequestHeader Long userId) {
+        System.out.println(task.getDueAt());
         return ResponseEntity.ok(taskService.save(task, userId));
     }
     

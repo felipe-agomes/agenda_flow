@@ -1,14 +1,21 @@
 import { useContext } from "react";
 import "../styles/ModalTask.css";
-import { FormProvider, useForm } from "react-hook-form";
 import CalendarContext from "../contexts/CalendarContext";
 import taskService from "../../domains/task/services/taskService";
 import InputTaskForm from "./InputTaskForm";
 import Task from "../../domains/task/entities/Task";
+import { FormProvider, useForm } from "react-hook-form";
+import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 
 type FormModalTaskData = Task;
 
-export default function ModalTask() {
+type ModalTaskProp = {
+  calendar: CalendarMonth;
+  selectedDay?: number;
+  callback: (task: Task) => void;
+}
+
+export default function ModalTask({ selectedDay, calendar, callback }: ModalTaskProp) {
   const { userId, isModalTaskOpen, closeModalTask } =
     useContext(CalendarContext);
 
@@ -16,15 +23,20 @@ export default function ModalTask() {
     defaultValues: {
       title: "",
       description: "",
-      dueAt: new Date(),
-      createdAt: new Date(),
+      dueAt: undefined,
+      createdAt: undefined,
     },
   });
 
   const onSubmit = async (data: FormModalTaskData) => {
     closeModalTask();
 
+    data.dueAt = new Date(calendar.year, calendar.month, selectedDay);
+    data.createdAt = new Date();
     const task = await taskService.saveTask(userId, data);
+    console.log(task);
+    
+    callback(task);
   };
 
   return (

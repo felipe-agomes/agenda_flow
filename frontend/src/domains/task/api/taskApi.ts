@@ -15,8 +15,8 @@ const taskApi = {
   API_URL: import.meta.env.VITE_API_URL,
   getTasksMonth: async (
     userId: number,
-    year?: number,
-    month?: number
+    year: number,
+    month: number
   ): Promise<TaskResponse[]> => {
     const response = await axios.get<TaskResponse[]>(
       `${taskApi.API_URL}/api/task/month`,
@@ -35,9 +35,9 @@ const taskApi = {
 
   getTasksDay: async (
     userId: number,
-    year?: number,
-    month?: number,
-    day?: number
+    year: number,
+    month: number,
+    day: number
   ): Promise<TaskResponse[]> => {
     const response = await axios.get<TaskResponse[]>(
       `${taskApi.API_URL}/api/task/day`,
