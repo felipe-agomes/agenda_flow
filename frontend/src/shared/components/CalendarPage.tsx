@@ -5,8 +5,8 @@ import CalendarContext from "../contexts/CalendarContext";
 import Panel from "../../domains/task/components/Panel";
 import TamplateContext from "../contexts/TamplateContext";
 import taskService from "../../domains/task/services/taskService";
-import CalendarMonth from "../../entities/CalendarMonth";
 import ModalTask from "./ModalTask";
+import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 
 export default function CalendarPage() {
   const {
