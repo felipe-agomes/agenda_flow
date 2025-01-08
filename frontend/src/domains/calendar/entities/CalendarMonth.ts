@@ -2,18 +2,20 @@ import CalendarDay from "./CalendarDay";
 import Task from "../../task/entities/Task";
 
 export default class CalendarMonth {
-  private _year?: number;
-  private _month?: number;
+  private _date: Date;
+  private _year: number;
+  private _month: number;
   private _calendarDays: CalendarDay[];
 
   public constructor(
     year?: number,
     month?: number,
-    calendarDays?: CalendarDay[]
   ) {
-    this._year = year;
-    this._month = month;
-    this._calendarDays = calendarDays ? calendarDays : [];
+    this._date = year && month ? new Date(year, month) : new Date();
+
+    this._year = this._date.getFullYear();
+    this._month = this._date.getMonth();
+    this._calendarDays = this.createCalendarDays();
   }
 
   public getAllTasks(): Task[] {
@@ -32,7 +34,6 @@ export default class CalendarMonth {
     return tasks;
   }
 
-
   public isTaskForDay(task: Task, day: number) {
     return task.dueAt.getDate() === day;
   }
@@ -47,7 +48,8 @@ export default class CalendarMonth {
     }
   }
 
-  public static createCalendarDays(daysInMonth: number) {
+  private createCalendarDays() {
+    const daysInMonth = new Date(this.year, this.month, 0).getDate();
     const calendarDays = Array.from({ length: daysInMonth }, (_, i) => {
       const day = i + 1;
 
@@ -57,32 +59,23 @@ export default class CalendarMonth {
     return calendarDays;
   }
 
-  public static getMonthInfo(year: number, month: number) {
-    const date = new Date(year, month - 1);
-    const daysInMonth = new Date(year, month, 0).getDate();
-    const monthName = date.toLocaleString("default", { month: "long" });
-
-    return {
-      year,
-      month,
-      monthName,
-      daysInMonth,
-    };
+  public getMonthName() {
+    return new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(this._date);
   }
 
-  public get year(): number | undefined {
+  public get year(): number {
     return this._year;
   }
 
-  public set year(value: number | undefined) {
+  public set year(value: number) {
     this._year = value;
   }
 
-  public get month(): number | undefined {
+  public get month(): number {
     return this._month;
   }
 
-  public set month(value: number | undefined) {
+  public set month(value: number) {
     this._month = value;
   }
 

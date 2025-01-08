@@ -9,23 +9,12 @@ import ModalTask from "./ModalTask";
 import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 
 export default function CalendarPage() {
-  const {
-    year,
-    month,
-    monthName,
-    daysInMonth
-  } = CalendarMonth.getMonthInfo(2025, 1); // TODO: Ver a possibilidade de colocar tudo no CalendarMonth
-
   const { setTitle } = useContext(TamplateContext);
   const { userId, closeModalTask, setSelectedDay, selectedDay } = useContext(CalendarContext);
-  const [calendar, setCalendar] = useState<CalendarMonth>(new CalendarMonth());
+  const [calendar, setCalendar] = useState<CalendarMonth>(new CalendarMonth(2025, 0));
 
   const updateCalendar = useCallback(async () => {
-    const updatedCalendar = new CalendarMonth();
-    updatedCalendar.year = year;
-    updatedCalendar.month = month;
-
-    updatedCalendar.calendarDays = CalendarMonth.createCalendarDays(daysInMonth);
+    const updatedCalendar = new CalendarMonth(2025, 0);
 
     const tasks = await taskService.fetchTasksMonth(
       userId,
@@ -36,13 +25,13 @@ export default function CalendarPage() {
     updatedCalendar.setTasks(tasks);
 
     setCalendar(updatedCalendar);
-  }, [year, month, daysInMonth, userId]);
+  }, [calendar, userId]);
 
   useEffect(() => {
-    setTitle(monthName);
+    setTitle(calendar.getMonthName());
 
     updateCalendar();
-  }, [monthName, updateCalendar, setTitle]);
+  }, [updateCalendar, setTitle]);
 
   const handleKeyDow = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === "Escape") {
