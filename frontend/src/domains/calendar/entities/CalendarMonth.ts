@@ -1,5 +1,5 @@
-import CalendarDay from "../domains/calendar/entities/CalendarDay";
-import Task from "../domains/task/entities/Task";
+import CalendarDay from "./CalendarDay";
+import Task from "../../task/entities/Task";
 
 export default class CalendarMonth {
   private _year?: number;
