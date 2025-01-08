@@ -54,7 +54,7 @@ const addTaskOnCalendar = (task: Task) => {
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
       <Panel tasks={selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()} />
-      <ModalTask /* TODO: Renomear para FormTask */ calendar={calendar} selectedDay={selectedDay} callback={addTaskOnCalendar} />
+      <ModalTask /* TODO: Renomear para FormTask */ calendar={calendar} callback={addTaskOnCalendar} />
     </section>
   );
 }

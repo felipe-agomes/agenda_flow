@@ -11,12 +11,11 @@ type FormModalTaskData = Task;
 
 type ModalTaskProp = {
   calendar: CalendarMonth;
-  selectedDay?: number;
   callback: (task: Task) => void;
 }
 
-export default function ModalTask({ selectedDay, calendar, callback }: ModalTaskProp) {
-  const { userId, isModalTaskOpen, closeModalTask } =
+export default function ModalTask({ calendar, callback }: ModalTaskProp) {
+  const { userId, isModalTaskOpen, closeModalTask, selectedDay } =
     useContext(CalendarContext);
 
   const methods = useForm<FormModalTaskData>({
@@ -34,7 +33,6 @@ export default function ModalTask({ selectedDay, calendar, callback }: ModalTask
     data.dueAt = new Date(calendar.year, calendar.month, selectedDay);
     data.createdAt = new Date();
     const task = await taskService.saveTask(userId, data);
-    console.log(task);
     
     callback(task);
   };
