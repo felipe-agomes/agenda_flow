@@ -4,9 +4,9 @@ export default class CalendarDay {
   private _day: number;
   private _tasks: Task[];
 
-  public constructor(day: number, task: Task[]) {
+  public constructor(day: number, tasks?: Task[]) {
     this._day = day;
-    this._tasks = task;
+    this._tasks = tasks ? tasks : [];
   }
 
   public get day() {

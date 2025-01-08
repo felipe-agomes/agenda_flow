@@ -1,13 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import Task from "../../domains/task/entities/Task";
-import Calendar from "../../domains/calendar/entities/CalendarMonth";
 
 type CalendarContextType = {
-  tasks: Task[];
-  setTasks: Dispatch<SetStateAction<Task[]>>;
-  calendar: Calendar;
-  setCalendar: Dispatch<SetStateAction<Calendar>>;
-  addTaskOnCalendar: (task: Task) => void;
   selectedDay: number | undefined;
   setSelectedDay: Dispatch<SetStateAction<number | undefined>>;
   isModalTaskOpen: boolean;
@@ -18,11 +11,6 @@ type CalendarContextType = {
 };
 
 const CalendarContext = createContext<CalendarContextType>({
-  tasks: [],
-  setTasks: () => {},
-  calendar: new Calendar(), 
-  setCalendar: () => {},
-  addTaskOnCalendar: () => {},
   selectedDay: undefined,
   setSelectedDay: () => {},
   isModalTaskOpen: false,

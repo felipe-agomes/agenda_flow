@@ -1,5 +1,5 @@
 import './App.css';
-import CalendarPage from "./domains/calendar/components/CalendarPage";
+import CalendarPage from "./shared/components/CalendarPage";
 import Tamplate from "./shared/components/Tamplate";
 import CalendarProvider from "./shared/providers/CalendarProvider";
 import TamplateProvider from "./shared/providers/TamplateProvider";

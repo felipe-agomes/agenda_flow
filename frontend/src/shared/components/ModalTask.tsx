@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import "../styles/ModalTask.css";
 import { FormProvider, useForm } from "react-hook-form";
-import taskService from "../services/taskService";
-import Task from "../entities/Task";
-import CalendarContext from "../../../shared/contexts/CalendarContext";
+import CalendarContext from "../contexts/CalendarContext";
+import taskService from "../../domains/task/services/taskService";
 import InputTaskForm from "./InputTaskForm";
+import Task from "../../domains/task/entities/Task";
 
 type FormModalTaskData = Task;
 

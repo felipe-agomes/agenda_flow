@@ -1,7 +1,4 @@
 import { useState } from "react";
-import Task from "../../domains/task/entities/Task";
-import calendarUtils from "../../domains/calendar/utils/calendarUtils";
-import Calendar from "../../domains/calendar/entities/CalendarMonth";
 import CalendarContext from "../contexts/CalendarContext";
 
 export default function CalendarProvider({
@@ -9,28 +6,16 @@ export default function CalendarProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [calendar, setCalendar] = useState<Calendar>(new Calendar());
   const [selectedDay, setSelectedDay] = useState<number | undefined>(undefined);
   const [isModalTaskOpen, setIsModalTaskOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number>(9361); // TODO: Esta fixo, mas precisa fazer um esquema de login
 
   const openModalTask = () => setIsModalTaskOpen(true);
   const closeModalTask = () => setIsModalTaskOpen(false);
-  const addTaskOnCalendar = (task: Task) => {
-    const newCalendar = calendarUtils.addTaskOnCalendar(calendar, task);
-    setCalendar(newCalendar);
-  };
-
 
   return (
     <CalendarContext.Provider
       value={{
-        tasks,
-        setTasks,
-        calendar,
-        setCalendar,
-        addTaskOnCalendar,
         selectedDay,
         setSelectedDay,
         isModalTaskOpen,

@@ -1,9 +1,14 @@
 import { useContext, useState } from "react";
 import "../styles/Panel.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
+import Task from "../entities/Task";
 
-export default function Panel() {
-  const { tasks, openModalTask, selectedDay } = useContext(CalendarContext);
+type PenelProp = {
+  tasks: Task[];
+};
+
+export default function Panel({ tasks }: PenelProp) {
+  const { openModalTask, selectedDay } = useContext(CalendarContext);
 
   const [panelStatus, setPanelStatus] = useState<string>("close");
 
