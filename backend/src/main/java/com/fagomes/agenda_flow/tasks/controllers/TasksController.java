@@ -3,8 +3,8 @@ package com.fagomes.agenda_flow.tasks.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fagomes.agenda_flow.tasks.entities.Task;
 import com.fagomes.agenda_flow.tasks.services.TaskService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 @RestController
 @RequestMapping(path = "/api/task")
@@ -41,4 +38,10 @@ public class TasksController {
         return ResponseEntity.ok(taskService.save(task, userId));
     }
     
+    @DeleteMapping
+    public boolean delete(@RequestBody Task task, @RequestHeader Long userId) {
+        taskService.delete(task, userId);
+
+        return false;
+    }
 }

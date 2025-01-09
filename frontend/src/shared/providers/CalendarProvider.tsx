@@ -12,9 +12,9 @@ export default function CalendarProvider({
   const [taskForm, setTaskForm] = useState<TaskForm>({ isOpen: false });
   const [userId, setUserId] = useState<number>(9361); // TODO: Esta fixo, mas precisa fazer um esquema de login
 
-  const openTaskForm = (task?: Task) => {
-    if (task) {
-      setTaskForm({ isOpen: true, task });
+  const openTaskForm = (existingTask?: Task) => {
+    if (existingTask) {
+      setTaskForm({ isOpen: true, existingTask });
     } else {
       setTaskForm({ isOpen: true });
     }

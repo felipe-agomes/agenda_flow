@@ -15,7 +15,7 @@ import com.fagomes.agenda_flow.tasks.entities.User;
 import com.fagomes.agenda_flow.tasks.repositories.TaskRepository;
 
 @Service
-public class TaskService {
+public class TaskService { // TODO: Melhorar o tratamento de erro geral, atualmente nao esta fazendo nenhum.
     @Autowired
     private TaskRepository taskRepository;
 
@@ -49,6 +49,15 @@ public class TaskService {
         task.setUser(user);
 
         return taskRepository.save(task);
+    }
+
+    public boolean delete(Task task, Long userId) {
+        User user = userService.getUserById(userId);
+        task.setUser(user);
+
+        taskRepository.delete(task);
+    
+        return true;
     }
 
     private void validateMonth(Integer month) {

@@ -1,10 +1,11 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import Task from "../../domains/task/entities/Task";
+import { TaskForm } from "../../domains/task/types/TaskForm";
 
 type CalendarContextType = {
   selectedDay: number | undefined;
   setSelectedDay: Dispatch<SetStateAction<number | undefined>>;
-  taskForm: { isOpen: boolean, task?: Task };
+  taskForm: TaskForm;
   openTaskForm: (task?: Task) => void;
   closeTaskForm: () => void;
   userId: number;
