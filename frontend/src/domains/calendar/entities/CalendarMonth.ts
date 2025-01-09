@@ -36,7 +36,7 @@ export default class CalendarMonth {
   }
 
   public isTaskForDay(task: Task, day: number) {
-    return task.dueAt.getDate() === day;
+    return task.getDueAt().getDate() === day;
   }
 
   public addTasks(tasks: Task[]) {
@@ -60,7 +60,7 @@ export default class CalendarMonth {
   public isTaskExists(compareTask: Task) {
     for (const calendarDay of this._calendarDays) {
       for (const task of calendarDay.tasks) {
-        if (task.id === compareTask.id)
+        if (task.getId() === compareTask.getId())
           return true;
       }
     }
@@ -71,7 +71,7 @@ export default class CalendarMonth {
   public updateTask(toUpdateTask: Task) {
     for (const calendarDay of this._calendarDays) {
       for (let task of calendarDay.tasks) {
-        if (task.id === toUpdateTask.id)
+        if (task.getId() === toUpdateTask.getId())
           Object.assign(task, toUpdateTask);
       }
     }

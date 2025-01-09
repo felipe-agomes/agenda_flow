@@ -6,7 +6,15 @@ import InputTaskForm from "./InputTaskForm";
 import Task from "../entities/Task";
 import CalendarMonth from "../../calendar/entities/CalendarMonth";
 
-type TaskFormData = Task;
+type TaskFormData = {
+  id?: number;
+  title?: string;
+  description?: string;
+  dueAt?: Date;
+  createdAt?: Date;
+  completedAt: Date | null;
+  deletedAt: Date | null;
+};
 
 type TaskFormProp = {
   calendar: CalendarMonth;
@@ -23,17 +31,21 @@ export default function TaskForm({ calendar, callback }: TaskFormProp) {
     description: "",
     dueAt: undefined,
     createdAt: undefined,
+    completedAt: null,
+    deletedAt: null
   });
 
   // Atualiza os valores do formulário sempre que uma nova tarefa for carregada
   useEffect(() => {
     if (taskForm.existingTask) {
       setFormValues({
-        id: taskForm.existingTask.id,
-        title: taskForm.existingTask.title,
-        description: taskForm.existingTask.description,
-        dueAt: taskForm.existingTask.dueAt,
-        createdAt: taskForm.existingTask.createdAt,
+        id: taskForm.existingTask.getId(),
+        title: taskForm.existingTask.getTitle(),
+        description: taskForm.existingTask.getDescription(),
+        dueAt: taskForm.existingTask.getDueAt(),
+        createdAt: taskForm.existingTask.getCreatedAt(),
+        completedAt: taskForm.existingTask.getCompletedAt(),
+        deletedAt: taskForm.existingTask.getDeletedAt(),
       });
     } else {
       setFormValues({
@@ -42,6 +54,8 @@ export default function TaskForm({ calendar, callback }: TaskFormProp) {
         description: "",
         dueAt: undefined,
         createdAt: undefined,
+        completedAt: null,
+        deletedAt: null,
       });
     }
   }, [taskForm.existingTask]);
@@ -55,14 +69,18 @@ export default function TaskForm({ calendar, callback }: TaskFormProp) {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (!formValues.id || !formValues.title || !formValues.description || !formValues.dueAt || !formValues.createdAt || !formValues.completedAt || !formValues.deletedAt) {
+      return;
+    }
+
     e.preventDefault();
     closeTaskForm();
 
-    const newTask = { ...formValues };
+    const newTask = new Task(formValues.id, formValues.title, formValues.description, formValues.dueAt, formValues.createdAt, formValues.completedAt, formValues.deletedAt)
 
     if (!taskForm.existingTask) {
-      newTask.dueAt = new Date(calendar.year, calendar.month, selectedDay);
-      newTask.createdAt = new Date();
+      newTask.setDueAt(new Date(calendar.year, calendar.month, selectedDay));
+      newTask.setCreatedAt(new Date());
     }
 
     const savedTask = await taskService.saveTask(userId, newTask);
