@@ -5,9 +5,9 @@ import CalendarContext from "../contexts/CalendarContext";
 import Panel from "../../domains/task/components/Panel";
 import TamplateContext from "../contexts/TamplateContext";
 import taskService from "../../domains/task/services/taskService";
-import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 import Task from "../../domains/task/entities/Task";
 import TaskForm from "../../domains/task/components/TaskForm";
+import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 
 export default function CalendarPage() {
   const { setTitle } = useContext(TamplateContext);
@@ -28,15 +28,17 @@ export default function CalendarPage() {
     setCalendar(updatedCalendar);
   }, [calendar, userId]);
 
+  const updateTask = (task: Task) => {
+    const updatedCalendar = new CalendarMonth(calendar.year, calendar.month, calendar.calendarDays);
 
-// TODO: AJustar a logica da funcao, porque ela nao vai apenas criar e adicionar, mas tambem ira atualizar a task
-const updateTask = (task: Task) => {
-  const updatedCalendar = new CalendarMonth(calendar.year, calendar.month);
-  
-  updatedCalendar.addTasks([...calendar.getAllTasks(), task]);
+    if (updatedCalendar.isTaskExists(task)) {
+      updatedCalendar.updateTask(task);
+    } else {
+      updatedCalendar.addTask(task);
+    }
 
-  setCalendar(updatedCalendar);
-};
+    setCalendar(updatedCalendar);
+  };
 
   useEffect(() => {
     setTitle(calendar.getMonthName());

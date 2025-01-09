@@ -10,12 +10,13 @@ export default class CalendarMonth {
   public constructor(
     year?: number,
     month?: number,
+    calendarDays?: CalendarDay[]
   ) {
     this._date = year && month ? new Date(year, month) : new Date();
 
     this._year = this._date.getFullYear();
     this._month = this._date.getMonth();
-    this._calendarDays = this.createCalendarDays();
+    this._calendarDays = calendarDays ? calendarDays : this.createCalendarDays();
   }
 
   public getAllTasks(): Task[] {
@@ -44,6 +45,34 @@ export default class CalendarMonth {
         if (this.isTaskForDay(task, calendarDay.day)) {
           calendarDay.tasks.push(task);
         }
+      }
+    }
+  }
+
+  public addTask(task: Task) {
+    for (const calendarDay of this.calendarDays) {
+      if (this.isTaskForDay(task, calendarDay.day)) {
+        calendarDay.tasks.push(task);
+      }
+    }
+  }
+
+  public isTaskExists(compareTask: Task) {
+    for (const calendarDay of this._calendarDays) {
+      for (const task of calendarDay.tasks) {
+        if (task.id === compareTask.id)
+          return true;
+      }
+    }
+
+    return false;
+  }
+
+  public updateTask(toUpdateTask: Task) {
+    for (const calendarDay of this._calendarDays) {
+      for (let task of calendarDay.tasks) {
+        if (task.id === toUpdateTask.id)
+          Object.assign(task, toUpdateTask);
       }
     }
   }
