@@ -29,7 +29,8 @@ export default function CalendarPage() {
   }, [calendar, userId]);
 
 
-const addTaskOnCalendar = (task: Task) => {
+// TODO: AJustar a logica da funcao, porque ela nao vai apenas criar e adicionar, mas tambem ira atualizar a task
+const updateTask = (task: Task) => {
   const updatedCalendar = new CalendarMonth(calendar.year, calendar.month);
   
   updatedCalendar.addTasks([...calendar.getAllTasks(), task]);
@@ -54,7 +55,7 @@ const addTaskOnCalendar = (task: Task) => {
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
       <Panel tasks={selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()} />
-      <TaskForm /* TODO: Renomear para FormTask */ calendar={calendar} callback={addTaskOnCalendar} />
+      <TaskForm /* TODO: Renomear para FormTask */ calendar={calendar} callback={updateTask} />
     </section>
   );
 }

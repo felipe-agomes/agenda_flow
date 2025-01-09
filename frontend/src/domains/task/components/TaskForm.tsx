@@ -49,7 +49,7 @@ export default function TaskForm({ calendar, callback }: TaskFormProp) {
     }
     const task = await taskService.saveTask(userId, data);
 
-    callback(task); // TODO: Ajustar para inserir caso nao exista, ou atualizar caso exista
+    callback(task);
   };
 
   return (
