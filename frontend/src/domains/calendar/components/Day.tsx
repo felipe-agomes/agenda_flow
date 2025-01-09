@@ -12,12 +12,11 @@ export default function Day({ calendarDay }: DayProps) {
 
   const { selectedDay, setSelectedDay } = useContext(CalendarContext);
 
-  const handleDayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const day = Number.parseInt(event.currentTarget.innerText);
-    if (selectedDay === day) {
+  const handleDayClick = () => {
+    if (selectedDay === calendarDay.day) {
       setSelectedDay(undefined);
     } else {
-      setSelectedDay(Number.parseInt(event.currentTarget.innerText));
+      setSelectedDay(calendarDay.day);
     }
   };
 

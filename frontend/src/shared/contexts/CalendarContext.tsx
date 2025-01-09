@@ -1,23 +1,24 @@
 import { createContext, Dispatch, SetStateAction } from "react";
+import Task from "../../domains/task/entities/Task";
 
 type CalendarContextType = {
   selectedDay: number | undefined;
   setSelectedDay: Dispatch<SetStateAction<number | undefined>>;
-  isModalTaskOpen: boolean;
-  openModalTask: Dispatch<SetStateAction<void>>;
-  closeModalTask: Dispatch<SetStateAction<void>>;
+  taskForm: { isOpen: boolean, task?: Task };
+  openTaskForm: (task?: Task) => void;
+  closeTaskForm: () => void;
   userId: number;
   setUserId: Dispatch<SetStateAction<number>>;
 };
 
 const CalendarContext = createContext<CalendarContextType>({
   selectedDay: undefined,
-  setSelectedDay: () => {},
-  isModalTaskOpen: false,
-  openModalTask: () => {},
-  closeModalTask: () => {},
+  setSelectedDay: () => { },
+  taskForm: { isOpen: false },
+  openTaskForm: () => { },
+  closeTaskForm: () => { },
   userId: 9361, // TODO: Esta fixo, mas precisa fazer um esquema de login
-  setUserId: () => {},
+  setUserId: () => { },
 });
 
 export default CalendarContext;

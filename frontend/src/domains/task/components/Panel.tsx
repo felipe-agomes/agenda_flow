@@ -2,13 +2,14 @@ import { useContext, useState } from "react";
 import "../styles/Panel.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
 import Task from "../entities/Task";
+import TaskItem from "./TaskItem";
 
 type PenelProp = {
   tasks: Task[];
 };
 
 export default function Panel({ tasks }: PenelProp) {
-  const { openModalTask, selectedDay } = useContext(CalendarContext);
+  const { openTaskForm, selectedDay } = useContext(CalendarContext);
 
   const [panelStatus, setPanelStatus] = useState<string>("close");
 
@@ -18,7 +19,7 @@ export default function Panel({ tasks }: PenelProp) {
 
   const handleAddButton = () => {
     if (selectedDay) {
-      openModalTask();
+      openTaskForm();
     }
   };
 
@@ -46,10 +47,8 @@ export default function Panel({ tasks }: PenelProp) {
         <ul id="task_list">
           {tasks.map((task) => {
             return (
-              <li key={task.id} className="task_item">
-                {task.dueAt + " = " + task.title}
-              </li>
-            ); // TODO: Criar um componente <Task /> porque vai ter mais complexidade
+              <TaskItem key={task.id} task={task} />
+            );
           })}
         </ul>
       </div>

@@ -48,6 +48,11 @@
     display: none;
 }
 
-#panel > #task_list > .task_item {
-  white-space: nowrap;
+#panel > #task_list {
+  padding: 0;
+  margin: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
