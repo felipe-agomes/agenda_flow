@@ -1,5 +1,7 @@
 import { useState } from "react";
 import CalendarContext from "../contexts/CalendarContext";
+import Task from "../../domains/task/entities/Task";
+import { TaskForm } from "../../domains/task/types/TaskForm";
 
 export default function CalendarProvider({
   children,
@@ -7,20 +9,26 @@ export default function CalendarProvider({
   children: React.ReactNode;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | undefined>(undefined);
-  const [isModalTaskOpen, setIsModalTaskOpen] = useState<boolean>(false);
+  const [taskForm, setTaskForm] = useState<TaskForm>({ isOpen: false });
   const [userId, setUserId] = useState<number>(9361); // TODO: Esta fixo, mas precisa fazer um esquema de login
 
-  const openModalTask = () => setIsModalTaskOpen(true);
-  const closeModalTask = () => setIsModalTaskOpen(false);
+  const openTaskForm = (task?: Task) => {
+    if (task) {
+      setTaskForm({ isOpen: true, task });
+    } else {
+      setTaskForm({ isOpen: true });
+    }
+  };
+  const closeTaskForm = () => setTaskForm({ isOpen: false });
 
   return (
     <CalendarContext.Provider
       value={{
         selectedDay,
         setSelectedDay,
-        isModalTaskOpen,
-        closeModalTask,
-        openModalTask,
+        taskForm,
+        closeTaskForm,
+        openTaskForm,
         userId,
         setUserId
       }}
