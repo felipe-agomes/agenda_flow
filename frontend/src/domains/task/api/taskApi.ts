@@ -66,9 +66,18 @@ const taskApi = {
         },
       }
     );
-    
+
     return response.data;
   },
+
+  deleteTask: async (taskId: number): Promise<boolean> => {
+    const response = await axios.delete<boolean>(
+      `${taskApi.API_URL}/api/task/delete`
+      , { headers: { taskId } }
+    );
+
+    return response.data;
+  }
 };
 
 export default taskApi;

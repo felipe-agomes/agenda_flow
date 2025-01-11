@@ -1,18 +1,18 @@
 export default class Task {
-  private id: number;
-  private title: string;
-  private description: string;
-  private dueAt: Date;
-  private createdAt: Date;
+  private id?: number;
+  private title?: string;
+  private description?: string;
+  private dueAt?: Date;
+  private createdAt?: Date;
   private completedAt: Date | null;
   private deletedAt: Date | null;
 
   public constructor(
-    id: number,
-    title: string,
-    description: string,
-    dueAt: Date,
-    createdAt: Date,
+    id: number | undefined,
+    title: string | undefined,
+    description: string | undefined,
+    dueAt: Date | undefined,
+    createdAt: Date | undefined,
     completedAt: Date | null,
     deletedAt: Date | null
   ) {

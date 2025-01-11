@@ -40,6 +40,18 @@ export default function CalendarPage() {
     setCalendar(updatedCalendar);
   };
 
+  const removeTask = (taskId?: number) => {
+    if (!taskId) {
+      return;
+    }
+
+    const updateCalendar = new CalendarMonth(calendar.year, calendar.month, calendar.calendarDays);
+
+    updateCalendar.removeTaskById(taskId);
+
+    setCalendar(updateCalendar);
+  };
+
   useEffect(() => {
     setTitle(calendar.getMonthName());
 
@@ -57,7 +69,7 @@ export default function CalendarPage() {
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
       <Panel tasks={selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()} />
-      <TaskForm /* TODO: Renomear para FormTask */ calendar={calendar} callback={updateTask} />
+      <TaskForm /* TODO: Renomear para FormTask */ calendar={calendar} callbackSave={updateTask} callbackRemove={removeTask} />
     </section>
   );
 }

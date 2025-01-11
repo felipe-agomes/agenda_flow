@@ -38,10 +38,10 @@ public class TasksController {
         return ResponseEntity.ok(taskService.save(task, userId));
     }
     
-    @DeleteMapping
-    public boolean delete(@RequestBody Task task, @RequestHeader Long userId) {
-        taskService.delete(task, userId);
+    @DeleteMapping("/delete")
+    public boolean delete(@RequestHeader Long taskId) {
+        taskService.delete(taskId);
 
-        return false;
+        return true;
     }
 }

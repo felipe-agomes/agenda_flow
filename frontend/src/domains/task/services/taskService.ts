@@ -41,6 +41,14 @@ const taskService = {
 
     return taskMapper.toTask(taskResponse);
   },
+
+  deleteById: async (taskId?: number) => {
+    if (!taskId) {
+      return false;
+    }
+
+    return await taskApi.deleteTask(taskId);
+  }
 };
 
 export default taskService;

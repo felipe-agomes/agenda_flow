@@ -15,7 +15,8 @@ import com.fagomes.agenda_flow.tasks.entities.User;
 import com.fagomes.agenda_flow.tasks.repositories.TaskRepository;
 
 @Service
-public class TaskService { // TODO: Melhorar o tratamento de erro geral, atualmente nao esta fazendo nenhum.
+public class TaskService { // TODO: Melhorar o tratamento de erro geral, atualmente nao esta fazendo
+                           // nenhum.
     @Autowired
     private TaskRepository taskRepository;
 
@@ -32,7 +33,14 @@ public class TaskService { // TODO: Melhorar o tratamento de erro geral, atualme
         LocalDateTime startMonth = getFirstDayFromMonth(year, month);
         LocalDateTime endMonth = getLastDayFromMonth(year, month);
 
-        return taskRepository.findByUserIdAndDueAtBetween(userId, startMonth, endMonth).orElse(new ArrayList<>()); // TODO: AJustar para pegar tambem as tarefas atrasadas
+        return taskRepository.findByUserIdAndDueAtBetween(userId, startMonth, endMonth).orElse(new ArrayList<>()); // TODO:
+                                                                                                                   // AJustar
+                                                                                                                   // para
+                                                                                                                   // pegar
+                                                                                                                   // tambem
+                                                                                                                   // as
+                                                                                                                   // tarefas
+                                                                                                                   // atrasadas
     }
 
     public List<Task> getTasksByUserIdAndDay(Long userId, Integer year, Integer month, Integer day) {
@@ -51,18 +59,18 @@ public class TaskService { // TODO: Melhorar o tratamento de erro geral, atualme
         return taskRepository.save(task);
     }
 
-    public boolean delete(Task task, Long userId) {
-        User user = userService.getUserById(userId);
-        task.setUser(user);
+    public boolean delete(Long taskId) {
+        Task task = taskRepository.findById(taskId).orElseThrow();
 
         taskRepository.delete(task);
-    
+
         return true;
     }
 
     private void validateMonth(Integer month) {
         if (month < 1 || month > 12) {
-            throw new IllegalArgumentException("O mês deve estar entre 1 e 12."); // TODO: Criar uma exception personalizada.
+            throw new IllegalArgumentException("O mês deve estar entre 1 e 12."); // TODO: Criar uma exception
+                                                                                  // personalizada.
         }
 
     }
