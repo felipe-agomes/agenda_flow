@@ -1,5 +1,5 @@
 import Day from "./Day";
-import "../styles/Calendar.css";
+import style from "../styles/Calendar.module.css";
 import CalendarMonth from "../entities/CalendarMonth";
 
 type CalendarProp = {
@@ -8,7 +8,7 @@ type CalendarProp = {
 
 export default function Calendar({ calendar }: CalendarProp) {
   return (
-    <div id="calendar">
+    <div className={style.calendar}>
       {calendar.calendarDays.map((calendarDay) => {
         return <Day key={calendarDay.day} calendarDay={calendarDay} />;
       })}

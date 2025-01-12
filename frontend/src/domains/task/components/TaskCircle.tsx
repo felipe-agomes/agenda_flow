@@ -1,5 +1,5 @@
-import "../styles/TaskCircle.css";
+import style from "../styles/TaskCircle.module.css";
 
 export default function TaskCircle() {
-  return <p className="circle">O</p>;
+  return <p className={style.circle}>O</p>;
 }

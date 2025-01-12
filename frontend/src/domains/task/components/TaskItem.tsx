@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Task from "../entities/Task";
-import "../styles/TaskItem.css";
+import style from "../styles/TaskItem.module.css";
 import TaskCircle from "./TaskCircle";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
 
@@ -15,10 +15,10 @@ export default function TaskItem({ task }: TaskItemProp) {
     openTaskForm(task);
   };
 
-  return <li key={task.id} className="task_item" onClick={handleTaskItemClick}>
-    <p hidden >{task.id}</p>
+  return <li key={task.getId()} className={style.taskItem} onClick={handleTaskItemClick}>
+    <p hidden >{task.getId()}</p>
     <TaskCircle />
-    <span>{task.dueAt.getDate()}</span>
-    <p className="task_title">{task.title}</p>
+    <span>{task.getDueAt()?.getDate()}</span>
+    <p className={style.taskTitle}>{task.getTitle()}</p>
   </li>
 }

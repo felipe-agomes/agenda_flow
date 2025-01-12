@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "../styles/TaskForm.css";
+import style from "../styles/TaskForm.module.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
 import Task from "../entities/Task";
 import CalendarMonth from "../../calendar/entities/CalendarMonth";
@@ -24,8 +24,7 @@ export default function TaskForm({ calendar, callbackSave, callbackRemove }: Tas
 
   return (
     <form
-      id="form_task"
-      className={taskForm.isOpen ? "display" : "hidden"}
+      className={`${style.formTask} ${taskForm.isOpen ? style.display : style.hidden}`}
     >
       <div>
         <label>Titulo</label>

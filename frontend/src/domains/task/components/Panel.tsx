@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../styles/Panel.css";
+import style from "../styles/Panel.module.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
 import TaskForm from "./TaskForm";
 import CalendarMonth from "../../calendar/entities/CalendarMonth";
@@ -14,12 +14,12 @@ type PenelProp = {
 
 export default function Panel({ calendar, callbackRemove, callbackSave }: PenelProp) {
   const { openTaskForm, selectedDay, closeTaskForm, taskForm } = useContext(CalendarContext);
-  const [panelStatus, setPanelStatus] = useState<string>("close");
+  const [panelIsOpen, setPanelIsOpen] = useState<boolean>(false);
 
   const tasks = selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()
 
   const handleDisplayButton = () => {
-    setPanelStatus(panelStatus === "open" ? "close" : "open");
+    setPanelIsOpen(!panelIsOpen);
   };
 
   const handleAddButton = () => {
@@ -30,18 +30,18 @@ export default function Panel({ calendar, callbackRemove, callbackSave }: PenelP
 
   return (
     <>
-      <div id="panel" className={panelStatus}>
-        <div className="panel_header">
-          <div className="header_left">
+      <div className={`${style.panel} ${panelIsOpen ? style.open : style.close}`}>
+        <div className={style.panelHeader}>
+          <div className={style.headerLeft}>
             <button
-              className="panel_display_button"
+              className={style.panelDisplayButton}
               onClick={handleDisplayButton}
             >
               P
             </button>
             {taskForm.isOpen ?
               <button
-                className="form_close_button"
+                className={style.formCloseButton}
                 type="button"
                 onClick={closeTaskForm}
               >
@@ -49,15 +49,14 @@ export default function Panel({ calendar, callbackRemove, callbackSave }: PenelP
               </button>
               :
               <button
-                className={`panel_add_button ${selectedDay ? "display" : "hidden"
-                  }`}
+                className={`${style.panelAddButton} ${selectedDay ? style.display : style.hidden}`}
                 onClick={handleAddButton}
               >
                 +
               </button>
             }
           </div>
-          <div className="header_right">
+          <div className={style.headerRight}>
           </div>
         </div>
         <TaskList tasks={tasks} />

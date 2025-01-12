@@ -1,4 +1,4 @@
-import "../styles/CalendarPage.css"
+import style from "../styles/CalendarPage.module.css"
 import Calendar from "../../domains/calendar/components/Calendar";
 import { useCallback, useContext, useEffect, useState } from "react";
 import CalendarContext from "../contexts/CalendarContext";
@@ -65,7 +65,7 @@ export default function CalendarPage() {
   };
 
   return (
-    <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
+    <section className={style.content} tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
       <Panel calendar={calendar} callbackSave={updateTask} callbackRemove={removeTask} />
     </section>

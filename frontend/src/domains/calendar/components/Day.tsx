@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import CalendarDay from "../entities/CalendarDay";
-import "../styles/Day.css";
+import style from "../styles/Day.module.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
 
 type DayProps = {
@@ -22,7 +22,7 @@ export default function Day({ calendarDay }: DayProps) {
 
   return (
     <div
-      id="day"
+      className={style.day}
       style={{ background: `rgb(${random},${random},${random})` }}
       onClick={handleDayClick}
     >

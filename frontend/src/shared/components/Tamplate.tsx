@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Header from "./Header";
-import "../styles/Tamplate.css";
+import style from "../styles/Tamplate.module.css";
 import TamplateContext from "../contexts/TamplateContext";
 
 type TamplateProps = {
@@ -12,7 +12,7 @@ function Tamplate({ children, headerTitle }: TamplateProps) {
   const { title } = useContext(TamplateContext);
 
   return (
-    <main id="tamplate">
+    <main className={style.tamplate}>
       <Header title={headerTitle ? headerTitle : title} />
       {children}
     </main>
