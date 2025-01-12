@@ -1,0 +1,24 @@
+.day {
+    cursor: pointer;
+    border-radius: 5px;
+    background: var(--cor-secundaria);
+    overflow: hidden;
+    color: var(--cor-secundaria);
+    transition: 0.2s;
+}
+
+.day.selected {
+  transform: scale(1.05);
+}
+
+.header {
+  padding: 5px;
+  background: var(--cor-cabecalho-day);
+  width: 100%;
+  border-bottom: 2px solid var(--cor-primaria);
+}
+
+.header > p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

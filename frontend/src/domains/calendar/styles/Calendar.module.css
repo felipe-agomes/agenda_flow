@@ -1,0 +1,17 @@
+.content {
+  width: 100%;
+  height: 95%;
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar {
+  padding: 10px;
+  width: 70%;
+  height: 100%;
+
+  flex-grow: 1;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(7, 1fr);
+}

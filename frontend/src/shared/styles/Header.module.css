@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+  height: 60px;
+  background: var(--cor-primaria);
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--cor-secundaria);
+  flex-grow: 1;
+}

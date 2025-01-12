@@ -1,0 +1,55 @@
+.formTask {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: var(--cor-primaria);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: 0.3s;
+}
+
+.formTask.display {
+  transform: translate(0);
+}
+
+.formTask.hidden {
+  transform: translate(100%);
+}
+
+.inputBox {
+  position: relative;
+  width: 100%;
+}
+
+.inputLabel {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--cor-font-input);
+  transition: 0.3s;
+}
+
+.inputLabel.upper {
+  top: -17px;
+  left: 0;
+  color: var(--cor-secundaria);
+}
+
+.inputLabel.error {
+  color: var(--cor-form-error);
+}
+
+.input {
+  border: none;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  background: var(--cor-secundaria);
+}

@@ -1,0 +1,79 @@
+.panel {
+  position: relative;
+  height: 100%;
+  background: var(--cor-primaria);
+  transition: 0.3s;
+}
+
+.panel.close {
+  width: 60px;
+}
+
+.panel.open {
+  width: 30%;
+}
+
+.panelHeader {
+  width: 100%;
+  height: 60px;
+  background: var(--cor-primaria);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.headerLeft {
+  display: flex;
+  height: 100%;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.panelDisplayButton,
+.panelAddButton,
+.panelCloseButton {
+  cursor: pointer;
+  min-width: 60px;
+  height: 100%;
+  border: none;
+  color: var(--cor-secundaria);
+}
+
+.panelDisplayButton {
+  width: 45px;
+  height: 45px;
+  transition: 0.3s;
+}
+
+.panelDisplayButton.close {
+  transform: rotate(360deg);
+}
+
+.panelDisplayButton.open {
+  transform: rotate(180deg);
+}
+
+.panelAddButton {
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+  transition: 0.3s
+}
+
+.panelCloseButton {
+  width: 100%;
+  height: 100%;
+  transform: rotate(135deg);
+  transition: 0.3s
+}
+
+.taskList {
+  padding: 0;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

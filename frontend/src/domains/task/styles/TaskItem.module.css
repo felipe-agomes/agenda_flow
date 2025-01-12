@@ -1,0 +1,20 @@
+.taskItem {
+  width: 100%;
+  height: 60px;
+  white-space: nowrap;
+  color: var(--cor-secundaria);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: 0.3s;
+}
+
+.taskItem:hover {
+  background: var(--cor-secundaria-hovered);
+}
+
+.taskDay {
+  margin-right: 10px;
+}
