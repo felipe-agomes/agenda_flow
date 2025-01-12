@@ -52,7 +52,8 @@ export default function CalendarPage() {
   };
 
   useEffect(() => {
-    setTitle(calendar.getMonthName());
+    const title = calendar.getShortMonthName().toUpperCase() + " " + calendar.year;
+    setTitle(title);
 
     updateCalendar();
   }, [setTitle]);

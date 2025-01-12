@@ -1,3 +1,4 @@
+import { IoIosArrowBack, IoIosAdd } from "react-icons/io";
 import { useContext, useState } from "react";
 import style from "../styles/Panel.module.css";
 import CalendarContext from "../../../shared/contexts/CalendarContext";
@@ -20,6 +21,7 @@ export default function Panel({ calendar, callbackRemove, callbackSave }: PenelP
 
   const handleDisplayButton = () => {
     setPanelIsOpen(!panelIsOpen);
+    closeTaskForm();
   };
 
   const handleAddButton = () => {
@@ -28,38 +30,31 @@ export default function Panel({ calendar, callbackRemove, callbackSave }: PenelP
     }
   };
 
+  const handleTaskItemClick = (task: Task) => {
+    openTaskForm(task);
+    setPanelIsOpen(true);
+  };
+
   return (
     <>
       <div className={`${style.panel} ${panelIsOpen ? style.open : style.close}`}>
         <div className={style.panelHeader}>
           <div className={style.headerLeft}>
-            <button
-              className={style.panelDisplayButton}
+            <IoIosArrowBack
+              className={`${style.panelDisplayButton} ${panelIsOpen ? style.open : style.close}`}
               onClick={handleDisplayButton}
-            >
-              P
-            </button>
-            {taskForm.isOpen ?
-              <button
-                className={style.formCloseButton}
-                type="button"
-                onClick={closeTaskForm}
-              >
-                X
-              </button>
-              :
-              <button
-                className={`${style.panelAddButton} ${selectedDay ? style.display : style.hidden}`}
-                onClick={handleAddButton}
-              >
-                +
-              </button>
+            />
+            {
+              (taskForm.isOpen || selectedDay)
+              && <IoIosAdd
+                className={taskForm.isOpen ? style.panelCloseButton : style.panelAddButton}
+                onClick={taskForm.isOpen ? closeTaskForm : handleAddButton} />
             }
           </div>
           <div className={style.headerRight}>
           </div>
         </div>
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} callback={handleTaskItemClick} />
         <TaskForm calendar={calendar} callbackSave={callbackSave} callbackRemove={callbackRemove} />
       </div>
     </>

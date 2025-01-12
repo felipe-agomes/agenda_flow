@@ -8,7 +8,6 @@ type DayProps = {
 };
 
 export default function Day({ calendarDay }: DayProps) {
-  const random = Math.floor(Math.random() * 156) + 100; // TODO: remover essa randomizacao, manter somente durante o desenvolvimento
 
   const { selectedDay, setSelectedDay } = useContext(CalendarContext);
 
@@ -22,11 +21,12 @@ export default function Day({ calendarDay }: DayProps) {
 
   return (
     <div
-      className={style.day}
-      style={{ background: `rgb(${random},${random},${random})` }}
+      className={`${style.day} ${selectedDay === calendarDay.day && style.selected}`}
       onClick={handleDayClick}
     >
-      <p>{calendarDay.day}</p>
+      <div className={style.header}>
+        <p>{calendarDay.day}</p>
+      </div>
     </div>
   );
 }

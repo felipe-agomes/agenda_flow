@@ -102,8 +102,12 @@ export default class CalendarMonth {
     return calendarDays;
   }
 
-  public getMonthName() {
+  public getLongMonthName() {
     return new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(this._date);
+  }
+
+  public getShortMonthName() {
+    return new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(this._date);
   }
 
   public get year(): number {

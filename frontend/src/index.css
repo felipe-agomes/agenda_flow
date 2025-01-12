@@ -1,7 +1,26 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --cor-primaria: rgb(58, 55, 54);
+  --cor-secundaria: rgb(218, 215, 214);
+  --cor-secundaria-hovered: rgb(78, 75, 75);
+  --cor-task-on-time: rgb(0, 0, 255);
+  --cor-task-completed: rgb(0, 255, 0);
+  --cor-task-late: rgb(255, 0, 0);
+  --cor-form-error: rgb(255, 0, 0);
+  --cor-cabecalho-day: rgb(164, 66, 0);
+  --cor-font-input: rgb(128, 125, 124);
+  --fonte-padrao: 'Arial', sans-serif;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', monospace;
   width: 100%;
   height: 100vh;
 }
