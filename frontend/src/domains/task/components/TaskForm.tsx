@@ -25,17 +25,8 @@ export default function TaskForm({ calendar, callbackSave, callbackRemove }: Tas
   return (
     <form
       id="form_task"
-      className={taskForm.isOpen ? "open" : "close"}
+      className={taskForm.isOpen ? "display" : "hidden"}
     >
-      <div className="form_header">
-        <button
-          className="form_close_button"
-          type="button"
-          onClick={closeTaskForm}
-        >
-          X
-        </button>
-      </div>
       <div>
         <label>Titulo</label>
         <input
@@ -56,7 +47,7 @@ export default function TaskForm({ calendar, callbackSave, callbackRemove }: Tas
         />
         {formErrors.description && <span>{formErrors.description}</span>}
       </div>
-      <button type="button" onClick={handleSaveSubmit}>Salvar</button>
+      <button type="button" onClick={handleSaveSubmit}>Salvar</button> {/* TODO: Remover daqui, e colocar no cabecalho do painel*/}
       {taskForm.existingTask && <button type="button" onClick={handleRemoveSubmit}>Remover</button>}
     </form>
   );

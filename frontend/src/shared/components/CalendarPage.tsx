@@ -6,12 +6,11 @@ import Panel from "../../domains/task/components/Panel";
 import TamplateContext from "../contexts/TamplateContext";
 import taskService from "../../domains/task/services/taskService";
 import Task from "../../domains/task/entities/Task";
-import TaskForm from "../../domains/task/components/TaskForm";
 import CalendarMonth from "../../domains/calendar/entities/CalendarMonth";
 
 export default function CalendarPage() {
   const { setTitle } = useContext(TamplateContext);
-  const { userId, closeTaskForm, setSelectedDay, selectedDay } = useContext(CalendarContext);
+  const { userId, closeTaskForm, setSelectedDay } = useContext(CalendarContext);
   const [calendar, setCalendar] = useState<CalendarMonth>(new CalendarMonth(2025, 0));
 
   const updateCalendar = useCallback(async () => {
@@ -68,8 +67,7 @@ export default function CalendarPage() {
   return (
     <section id="content" tabIndex={0} onKeyDown={handleKeyDow}>
       <Calendar calendar={calendar} />
-      <Panel tasks={selectedDay ? calendar.getTasksDay(selectedDay) : calendar.getAllTasks()} />
-      <TaskForm /* TODO: Renomear para FormTask */ calendar={calendar} callbackSave={updateTask} callbackRemove={removeTask} />
+      <Panel calendar={calendar} callbackSave={updateTask} callbackRemove={removeTask} />
     </section>
   );
 }
