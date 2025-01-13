@@ -6,7 +6,6 @@ import CalendarMonth from "../../calendar/entities/CalendarMonth";
 import useTaskForm from "../hooks/useTaskForm";
 import { TaskFormData } from "../utils/taskFormValidator";
 import clsx from "clsx";
-import EmojiSelector from "../../../shared/components/EmojiSelector";
 
 export type TaskForm = {
   isOpen: boolean;
