@@ -6,6 +6,7 @@ import CalendarMonth from "../../calendar/entities/CalendarMonth";
 import useTaskForm from "../hooks/useTaskForm";
 import { TaskFormData } from "../utils/taskFormValidator";
 import clsx from "clsx";
+import EmojiSelector from "../../../shared/components/EmojiSelector";
 
 export type TaskForm = {
   isOpen: boolean;
@@ -64,6 +65,7 @@ export default function TaskForm({ calendar, callbackSave, callbackRemove }: Tas
           className={style.input}
         />
       </div>
+      <EmojiSelector />
       <button type="button" onClick={handleSaveSubmit}>Salvar</button> {/* TODO: Remover daqui, e colocar no cabecalho do painel*/}
       {taskForm.existingTask && <button type="button" onClick={handleRemoveSubmit}>Remover</button>}
     </form>

@@ -6,6 +6,7 @@ import TaskForm from "./TaskForm";
 import CalendarMonth from "../../calendar/entities/CalendarMonth";
 import Task from "../entities/Task";
 import TaskList from "./TaskList";
+import clsx from "clsx";
 
 type PenelProp = {
   calendar: CalendarMonth;
@@ -37,11 +38,23 @@ export default function Panel({ calendar, callbackRemove, callbackSave }: PenelP
 
   return (
     <>
-      <div className={`${style.panel} ${panelIsOpen ? style.open : style.close}`}>
+      <div className={clsx(
+        style.panel,
+        {
+          [style.open]: panelIsOpen,
+          [style.close]: !panelIsOpen
+        }
+      )}>
         <div className={style.panelHeader}>
           <div className={style.headerLeft}>
             <IoIosArrowBack
-              className={`${style.panelDisplayButton} ${panelIsOpen ? style.open : style.close}`}
+              className={clsx(
+                style.panelDisplayButton,
+                {
+                  [style.open]: panelIsOpen,
+                  [style.close]: !panelIsOpen
+                }
+              )}
               onClick={handleDisplayButton}
             />
             {
