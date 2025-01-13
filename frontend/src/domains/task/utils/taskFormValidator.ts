@@ -6,8 +6,6 @@ export type TaskFormData = {
   createdAt?: Date;
   completedAt: Date | null;
   deletedAt: Date | null;
-
-  [key: string]: string;
 };
 
 export type TaskFormValidate = {
