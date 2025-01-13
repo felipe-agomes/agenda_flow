@@ -65,9 +65,10 @@ export default function TaskForm({ calendar, callbackSave, callbackRemove }: Tas
           className={style.input}
         />
       </div>
-      <EmojiSelector />
-      <button type="button" onClick={handleSaveSubmit}>Salvar</button> {/* TODO: Remover daqui, e colocar no cabecalho do painel*/}
-      {taskForm.existingTask && <button type="button" onClick={handleRemoveSubmit}>Remover</button>}
+      <div className={style.footerButtonBox}>
+        <button type="button" className={style.buttonSave} onClick={handleSaveSubmit}>Salvar</button>
+        {taskForm.existingTask && <button type="button" className={style.buttonRemove} onClick={handleRemoveSubmit}>Remover</button>}
+      </div>
     </form>
   );
 }

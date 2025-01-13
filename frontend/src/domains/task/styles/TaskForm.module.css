@@ -53,3 +53,27 @@
   outline: none;
   background: var(--cor-secundaria);
 }
+
+.footerButtonBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonSave,
+.buttonRemove {
+  color: var(--cor-primaria);
+  border: none;
+  font-weight: bold;
+  width: 100px;
+  height: 40px;
+}
+
+.buttonSave {
+  background: var(--cor-button-save);
+}
+
+.buttonRemove {
+  background: var(--cor-button-remove);
+}
