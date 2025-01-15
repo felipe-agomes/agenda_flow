@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CalendarContext from "../contexts/CalendarContext";
 import Task from "../../domains/task/entities/Task";
-import { TaskForm } from "../../domains/task/types/TaskForm";
+import { TaskForm } from "../../domains/task/components/TaskForm";
 
 export default function CalendarProvider({
   children,
